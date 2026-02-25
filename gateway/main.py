@@ -106,14 +106,14 @@ async def get_all_students(token: dict = Depends(verify_token)):
 async def get_student(student_id: int):
     return await forward_request("student", f"/api/students/{student_id}", "GET")
 
+# --- UPDATED POST ROUTE ---
 @app.post("/gateway/students")
-async def create_student(request: Request):
-    body = await request.json()
+async def create_student(body: dict):
     return await forward_request("student", "/api/students", "POST", json=body)
 
+# --- UPDATED PUT ROUTE ---
 @app.put("/gateway/students/{student_id}")
-async def update_student(student_id: int, request: Request):
-    body = await request.json()
+async def update_student(student_id: int, body: dict):
     return await forward_request("student", f"/api/students/{student_id}", "PUT", json=body)
 
 @app.delete("/gateway/students/{student_id}")
