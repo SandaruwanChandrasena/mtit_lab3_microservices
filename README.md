@@ -3,8 +3,21 @@
 This project demonstrates a **Microservices Architecture** using **Python** and **FastAPI**.
 It was developed for the **Modern Topics in IT (IT4020)** module.
 
-🔗 **Repository Link:**  
+---
+
+## 🌍 GitHub Repository
+
+The complete source code for this project is available on GitHub:
+
+🔗 **Repository Link:**
 [MTIT Lab 3 - Microservices Architecture](https://github.com/SandaruwanChandrasena/mtit_lab3_microservices.git)
+
+Clone the repository using:
+
+```bash
+git clone https://github.com/SandaruwanChandrasena/mtit_lab3_microservices.git
+cd mtit_lab3_microservices
+```
 
 ---
 
@@ -31,72 +44,72 @@ microservices-fastapi/
 
 ---
 
-## 🚀 How to Run the Project
+# 🚀 How to Run the Project
 
-### Step 1: Create Virtual Environment
+## Step 1: Create Virtual Environment
 
-Open terminal inside the root `microservices-fastapi` folder:
+Open terminal inside the root `microservices-fastapi` folder.
 
-### Windows:
+### Windows
 
-```
+```powershell
 python -m venv venv
 .\venv\Scripts\activate
 ```
 
-### Mac/Linux:
+### Mac/Linux
 
-```
+```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
 ---
 
-### Step 2: Install Dependencies
+## Step 2: Install Dependencies
 
-```
+```powershell
 pip install -r requirements.txt
 ```
 
 ---
 
-### Step 3: Start All Services
+## Step 3: Start All Services
 
-#### ✅ Option A — Using `run_all.bat` (Recommended for Windows)
+### ✅ Option A — Using `run_all.bat` (Recommended for Windows)
 
-Double-click `run_all.bat` inside the root folder.
+Simply double-click the `run_all.bat` file in the root folder.
 
 ---
 
-#### ✅ Option B — Manual Start (Open 3 Terminals)
+### ✅ Option B — Manual Start (Open 3 Terminals)
 
-Make sure virtual environment is activated in each terminal.
+Make sure the virtual environment is activated in each terminal.
 
-### Terminal 1
+### Terminal 1 – Student Service
 
-```
+```powershell
 cd student-service
 uvicorn main:app --reload --port 8001
 ```
 
-### Terminal 2
+### Terminal 2 – Course Service
 
-```
+```powershell
 cd course-service
 uvicorn main:app --reload --port 8002
 ```
 
-### Terminal 3
+### Terminal 3 – API Gateway
 
-```
+```powershell
 cd gateway
 uvicorn main:app --reload --port 8000
 ```
 
 ---
 
-## 🌐 Application URLs
+# 🌐 Application URLs
 
 | Service                  | URL                                                      |
 | ------------------------ | -------------------------------------------------------- |
@@ -106,9 +119,9 @@ uvicorn main:app --reload --port 8000
 
 ---
 
-## 🔐 Testing the Gateway with JWT Authentication
+# 🔐 Testing the Gateway with JWT Authentication
 
-### 1️⃣ Get Access Token
+## 1️⃣ Get Access Token
 
 Send a **POST** request to:
 
@@ -116,12 +129,11 @@ Send a **POST** request to:
 http://localhost:8000/gateway/login
 ```
 
-⚠ This is a mock authentication endpoint for lab purposes.
-No request body is required.
+This is a mock authentication endpoint for lab purposes.
 
 You will receive:
 
-```
+```json
 {
   "access_token": "your_token_here"
 }
@@ -129,24 +141,51 @@ You will receive:
 
 ---
 
-### 2️⃣ Authorize in Swagger UI
+## 2️⃣ Authorize in Swagger UI
 
-1. Open: [http://localhost:8000/docs](http://localhost:8000/docs)
-2. Click the green **Authorize 🔒** button
-3. Paste your token
-4. Click **Authorize**
+### Step A – Open Swagger
 
-If using Postman:
+Open:
 
-* Go to **Authorization**
-* Select **Bearer Token**
-* Paste the token
+```
+http://localhost:8000/docs
+```
+
+### Step B – Click Authorize
+
+Click the green **Authorize 🔒** button (top right corner).
+
+### Step C – Enter Credentials
+
+Enter the following:
+
+```
+Username: admin
+Password: admin123
+```
+
+Then click **Authorize**.
+
+After successful login, you will be able to access all protected endpoints through the Gateway.
 
 ---
 
-### 3️⃣ Call Protected Endpoints
+## 📮 Using Postman
 
-Now you can test:
+If testing with Postman:
+
+1. Go to the **Authorization** tab
+2. Select **Bearer Token**
+3. Paste the `access_token` obtained from `/gateway/login`
+4. Send your request
+
+The request will now be authenticated and routed correctly through the API Gateway.
+
+---
+
+## 3️⃣ Call Protected Endpoints
+
+After authorization, you can test:
 
 ```
 GET     /gateway/students
@@ -156,15 +195,15 @@ PUT     /gateway/students/{id}
 DELETE  /gateway/students/{id}
 ```
 
-All requests will route through the API Gateway to their respective microservices.
+All requests are routed through the API Gateway to their respective microservices.
 
 ---
 
-# 📌 Bonus: `run_all.bat` File
+# 📌 Bonus: run_all.bat File
 
-Create a file named `run_all.bat` inside the root folder and paste:
+Create a file named `run_all.bat` in the root folder and paste:
 
-```
+```bat
 @echo off
 echo Starting Microservices Architecture...
 
@@ -179,3 +218,4 @@ start cmd /k ".\venv\Scripts\activate && cd gateway && uvicorn main:app --reload
 
 echo All services are booting up in separate windows!
 ```
+
