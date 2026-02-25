@@ -1,0 +1,13 @@
+@echo off
+echo Starting Microservices Architecture...
+
+echo Starting Student Service (Port 8001)...
+start cmd /k ".\venv\Scripts\activate && cd student-service && uvicorn main:app --reload --port 8001"
+
+echo Starting Course Service (Port 8002)...
+start cmd /k ".\venv\Scripts\activate && cd course-service && uvicorn main:app --reload --port 8002"
+
+echo Starting API Gateway (Port 8000)...
+start cmd /k ".\venv\Scripts\activate && cd gateway && uvicorn main:app --reload --port 8000"
+
+echo All services are booting up in separate windows!
